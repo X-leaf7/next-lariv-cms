@@ -1,0 +1,210 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema 
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model profile {
+  id        Int     @id
+  firstName String? @db.VarChar(50)
+  lastName  String? @db.VarChar(50)
+  age       String? @db.VarChar(50)
+  mobile    String? @db.VarChar(50)
+  img       String? @db.LongText
+  email     String? @unique @db.VarChar(50)
+  password  String? @db.VarChar(50)
+
+  createAt DateTime @default(now()) @db.Timestamp(0)
+  updateAt DateTime @default(now()) @updatedAt @db.Timestamp(0)
+}
+
+model home_page {
+  id                                 Int     @id
+  top_section_subTitleColor          String? @db.VarChar(400)
+  top_section_subTitle               String? @db.VarChar(400)
+  top_section_heading_title_1        String? @db.VarChar(400)
+  top_section_heading_title_2        String? @db.VarChar(400)
+  top_section_heading_title_3        String? @db.VarChar(400)
+  top_section_description            String? @db.LongText
+  top_section_button_cover_text      String? @db.VarChar(400)
+  top_section_button_cover_link      String? @db.VarChar(400)
+  counter_section_one_count_number   String? @db.VarChar(400)
+  counter_section_one_count_des      String? @db.VarChar(400)
+  counter_section_two_count_number   String? @db.VarChar(400)
+  counter_section_two_count_des      String? @db.VarChar(400)
+  counter_section_three_count_number String? @db.VarChar(400)
+  counter_section_three_count_des    String? @db.VarChar(400)
+  profile_img                        String? @db.LongText
+  profile_shape_counter              String? @db.VarChar(400)
+  profile_shape_text                 String? @db.VarChar(400)
+}
+
+model about_page {
+  id                                     Int     @id
+  top_title_heading                      String? @db.VarChar(400)
+  top_title_heading_theme_color          String? @db.VarChar(400)
+  top_title_subHeading                   String? @db.VarChar(400)
+  about_profile_img                      String? @db.LongText
+  info_content_email                     String? @db.VarChar(400)
+  info_content_address                   String? @db.VarChar(400)
+  social_link_facebook                   String? @db.VarChar(400)
+  social_link_twitter                    String? @db.VarChar(400)
+  social_link_linkdin                    String? @db.VarChar(400)
+  social_link_git                        String? @db.VarChar(400)
+  button_title                           String? @db.VarChar(400)
+  button_link                            String? @db.VarChar(400)
+  top_about_section_heading_title        String? @db.VarChar(400)
+  top_about_section_heading_title_color  String? @db.VarChar(400)
+  top_about_section_des                  String? @db.VarChar(400)
+  personal_section_heading_title         String? @db.VarChar(400)
+  personal_section_inner_action_fullName String? @db.VarChar(400)
+  personal_section_inner_action_birthday String? @db.VarChar(400)
+  personal_section_inner_action_email    String? @db.VarChar(400)
+  personal_section_inner_action_skype    String? @db.VarChar(400)
+}
+
+model portfolio_page {
+  id                  Int     @id
+  heading_title       String? @db.VarChar(400)
+  heading_title_color String? @db.VarChar(400)
+  heading_title_des   String? @db.VarChar(400)
+}
+
+model service_page {
+  id                  Int     @id
+  heading_title       String? @db.VarChar(400)
+  heading_title_color String? @db.VarChar(400)
+  heading_title_des   String? @db.VarChar(400)
+}
+
+model blog_page {
+  id                  Int     @id
+  heading_title       String? @db.VarChar(400)
+  heading_title_color String? @db.VarChar(400)
+  heading_title_des   String? @db.LongText
+}
+
+model contact_page {
+  id                      Int     @id
+  heading_title           String? @db.VarChar(400)
+  heading_title_color     String? @db.VarChar(400)
+  heading_title_des       String? @db.VarChar(400)
+  contact_form_heading    String? @db.VarChar(400)
+  contact_info_google_map String? @db.VarChar(400)
+}
+
+model portfolio {
+  id       Int     @id @default(autoincrement())
+  title    String? @db.VarChar(400)
+  category String? @db.VarChar(400)
+  link     String? @db.VarChar(400)
+  img      String? @db.LongText
+
+  createAt DateTime @default(now()) @db.Timestamp(0)
+  updateAt DateTime @default(now()) @updatedAt @db.Timestamp(0)
+}
+
+model service {
+  id    Int     @id @default(autoincrement())
+  title String? @db.VarChar(400)
+  des   String? @db.VarChar(400)
+  img   String? @db.LongText
+
+  createAt DateTime @default(now()) @db.Timestamp(0)
+  updateAt DateTime @default(now()) @updatedAt @db.Timestamp(0)
+}
+
+model blog {
+  id        Int     @id @default(autoincrement())
+  title     String? @db.VarChar(400)
+  keywords  String? @db.VarChar(400)
+  short_des String? @db.VarChar(400)
+  long_des  String? @db.LongText
+  img       String? @db.LongText
+
+  createAt DateTime  @default(now()) @db.Timestamp(0)
+  updateAt DateTime  @default(now()) @updatedAt @db.Timestamp(0)
+  comment  comment[]
+}
+
+model message {
+  id       Int     @id @default(autoincrement())
+  name     String? @db.VarChar(400)
+  email    String? @db.VarChar(400)
+  website  String? @db.VarChar(400)
+  long_des String? @db.LongText
+
+  createAt DateTime @default(now()) @db.Timestamp(0)
+  updateAt DateTime @default(now()) @updatedAt @db.Timestamp(0)
+}
+
+model comment {
+  id      Int      @id @default(autoincrement())
+  name    String?  @db.VarChar(400)
+  email   String?  @db.VarChar(400)
+  comment String?  @db.LongText
+  approve Boolean? @default(false)
+  blogId  Int
+  blog    blog     @relation(fields: [blogId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  createAt DateTime @default(now()) @db.Timestamp(0)
+  updateAt DateTime @default(now()) @updatedAt @db.Timestamp(0)
+}
+
+model experience {
+  id           Int     @id @default(autoincrement())
+  title        String? @db.VarChar(400)
+  company      String? @db.VarChar(400)
+  time_section String? @db.VarChar(400)
+  long_des     String? @db.LongText
+
+  createAt DateTime @default(now()) @db.Timestamp(0)
+  updateAt DateTime @default(now()) @updatedAt @db.Timestamp(0)
+}
+
+model education {
+  id           Int     @id @default(autoincrement())
+  title        String? @db.VarChar(400)
+  institute    String? @db.VarChar(400)
+  time_section String? @db.VarChar(400)
+  long_des     String? @db.LongText
+
+  createAt DateTime @default(now()) @db.Timestamp(0)
+  updateAt DateTime @default(now()) @updatedAt @db.Timestamp(0)
+}
+
+model skill {
+  id           Int     @id @default(autoincrement())
+  title        String? @db.VarChar(400)
+  category     String? @db.VarChar(400)
+  time_section String? @db.VarChar(400)
+  subject      String? @db.VarChar(400)
+  percent      String? @db.VarChar(400)
+
+  createAt DateTime @default(now()) @db.Timestamp(0)
+  updateAt DateTime @default(now()) @updatedAt @db.Timestamp(0)
+}
+
+model review {
+  id       Int     @id @default(autoincrement())
+  name     String? @db.VarChar(400)
+  address  String? @db.VarChar(400)
+  img      String? @db.VarChar(400)
+  long_des String? @db.LongText
+
+  createAt DateTime @default(now()) @db.Timestamp(0)
+  updateAt DateTime @default(now()) @updatedAt @db.Timestamp(0)
+}
+
+model visitor_data {
+  id       Int      @id @default(autoincrement())
+  ip       String?  @db.VarChar(400)
+  createAt DateTime @default(now()) @db.Timestamp(0)
+  updateAt DateTime @default(now()) @updatedAt @db.Timestamp(0)
+}
