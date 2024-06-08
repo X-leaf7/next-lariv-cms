@@ -10,6 +10,7 @@ import {
   FaXmark,
 } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
+
 const MasterLayout = (props) => {
   const pathname = usePathname();
   const [sidebar, setSidebar] = useState(false);
